@@ -1,7 +1,11 @@
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { getContacts } from 'redux/selectors';
 import PropTypes from 'prop-types';
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import { nanoid } from 'nanoid';
+import { addContact } from 'redux/actions';
 import {
   FormBox,
   AddContactBtn,
@@ -11,6 +15,7 @@ import {
   ErrorText,
 } from './Form.styled';
 
+//=================== Validation ==================
 const nameRules = /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
 const numberRules =
   /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/;
@@ -42,10 +47,13 @@ const FormError = ({ name }) => {
     />
   );
 };
+//=================== Validation ==================
 
-export const ContactForm = ({ contacts, addItemContact }) => {
+export const ContactForm = () => {
   const nameInputId = nanoid();
   const numberInputId = nanoid();
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
 
   const initialValues = {
     name: '',
@@ -53,23 +61,15 @@ export const ContactForm = ({ contacts, addItemContact }) => {
   };
 
   const handleSubmit = (value, actions) => {
-    let formData = {
-      id: nanoid(),
-      name: value.name,
-      number: value.number,
-    };
-
     const findName = contacts.find(
       contact => contact.name.toLowerCase() === value.name.toLowerCase()
     );
-    console.log(findName);
 
     if (findName) {
       alert(`${value.name} is already in contacts`);
       return;
     }
-
-    addItemContact(formData);
+    dispatch(addContact(value.name, value.number));
 
     actions.resetForm();
   };

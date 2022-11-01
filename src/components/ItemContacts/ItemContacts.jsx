@@ -1,3 +1,5 @@
+import { useDispatch } from 'react-redux';
+import { deleteContact } from 'redux/actions';
 import PropTypes from 'prop-types';
 import { FaUserTimes } from 'react-icons/fa';
 import {
@@ -7,12 +9,14 @@ import {
   TelContact,
 } from './ItemContacts.styled';
 
-export const ItemContacts = ({ id, name, number, onDelete }) => {
+export const ItemContacts = ({ id, name, number }) => {
+  const dispatch = useDispatch();
+  const handleDelete = () => dispatch(deleteContact(id));
   return (
     <ItemContact id={id}>
       <NameContact>
         {name}
-        <DeleteContactBtn onClick={() => onDelete(id)}>
+        <DeleteContactBtn onClick={handleDelete}>
           <FaUserTimes size={18} />
         </DeleteContactBtn>
       </NameContact>
@@ -25,5 +29,4 @@ ItemContacts.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
-  onDelete: PropTypes.func.isRequired,
 };
