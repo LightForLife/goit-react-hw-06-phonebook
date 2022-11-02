@@ -54,7 +54,6 @@ export const ContactForm = () => {
 
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
-  console.log(contacts.items);
 
   const initialValues = {
     name: '',
