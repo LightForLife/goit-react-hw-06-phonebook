@@ -16,7 +16,7 @@ code {
 
 /* =============== Test Todo ================== */
 
-/* ul {
+ul {
   list-style: none;
 }
 
@@ -34,4 +34,4 @@ li {
 
 input:checked + span {
   text-decoration: line-through;
-} */
+}
