@@ -8,22 +8,24 @@ import { ItemContacts } from 'components/ItemContacts/ItemContacts';
 export const ListContacts = () => {
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
-  console.log(contacts);
-  console.log(filter);
+  // console.log(contacts);
+  // console.log(filter.filterValue);
 
-  const getVisibleContacts = () => {
-    const constNormalizedFilter = filter.toLowerCase();
+  const visibleContacts = () => {
+    const constNormalizedFilter = filter.filterValue.toLowerCase();
 
-    const filterContacts = contacts.filter(contact =>
+    const filterContacts = contacts.items.filter(contact =>
       contact.name.toLowerCase().includes(constNormalizedFilter)
     );
 
     return filterContacts;
   };
 
+  const getVisibleContacts = visibleContacts();
+
   return (
     <ul>
-      {contacts.map(({ id, name, number }) => (
+      {getVisibleContacts.map(({ id, name, number }) => (
         <ItemContacts key={nanoid()} id={id} name={name} number={number} />
       ))}
     </ul>
@@ -37,6 +39,6 @@ ListContacts.propTypes = {
       name: PropTypes.string.isRequired,
       number: PropTypes.string.isRequired,
     })
-  ).isRequired,
-  onDelete: PropTypes.func.isRequired,
+  ),
+  onDelete: PropTypes.func,
 };

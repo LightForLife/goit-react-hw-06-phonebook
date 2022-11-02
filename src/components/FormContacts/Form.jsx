@@ -1,5 +1,4 @@
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from 'redux/selectors';
 import PropTypes from 'prop-types';
 import { Formik, ErrorMessage } from 'formik';
@@ -52,8 +51,10 @@ const FormError = ({ name }) => {
 export const ContactForm = () => {
   const nameInputId = nanoid();
   const numberInputId = nanoid();
+
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
+  console.log(contacts.items);
 
   const initialValues = {
     name: '',
@@ -61,7 +62,7 @@ export const ContactForm = () => {
   };
 
   const handleSubmit = (value, actions) => {
-    const findName = contacts.find(
+    const findName = contacts.items.find(
       contact => contact.name.toLowerCase() === value.name.toLowerCase()
     );
 
@@ -117,8 +118,8 @@ ContactForm.propTypes = {
       name: PropTypes.string.isRequired,
       number: PropTypes.string.isRequired,
     })
-  ).isRequired,
-  addItemContact: PropTypes.func.isRequired,
+  ),
+  onSubmit: PropTypes.func,
 };
 
 //=============== var 2 =========================
