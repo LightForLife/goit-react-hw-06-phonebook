@@ -1,6 +1,6 @@
 import { ErrorMessage } from 'formik';
 import * as yup from 'yup';
-import { ErrorText } from '../FormContacts/Form.styled';
+import { ErrorText } from './Validation.styled';
 
 //=================== Validation ==================
 
