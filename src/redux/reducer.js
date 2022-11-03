@@ -1,6 +1,8 @@
+import { createReducer } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { addContact, deleteContact, filterContacts } from './actions';
 
 const contactsInitialState = {
   items: [
@@ -11,37 +13,31 @@ const contactsInitialState = {
   ],
 };
 
-const contactsReducer = (state = contactsInitialState, action) => {
-  switch (action.type) {
-    case 'contacts/addContact':
-      return { items: [action.payload, ...state.items] };
-    case 'contacts/deleteContact':
-      return {
-        items: state.items.filter(contact => contact.id !== action.payload),
-      };
-    default:
-      return state;
-  }
-};
+export const contactsReducer = createReducer(contactsInitialState, {
+  [addContact]: (state, action) => {
+    return { items: [action.payload, ...state.items] };
+  },
+  [deleteContact]: (state, action) => {
+    return {
+      items: state.items.filter(contact => contact.id !== action.payload),
+    };
+  },
+});
 
 const filterInitialState = {
   filterValue: '',
 };
 
-const filterReducer = (state = filterInitialState, action) => {
-  switch (action.type) {
-    case 'contacts/filterContact': {
-      return {
-        ...state,
-        filterValue: action.payload,
-      };
-    }
-    default:
-      return state;
-  }
-};
+export const filterReducer = createReducer(filterInitialState, {
+  [filterContacts]: (state, action) => {
+    return {
+      ...state,
+      filterValue: action.payload,
+    };
+  },
+});
 
-export const rootReducer = combineReducers({
+const rootReducer = combineReducers({
   contacts: contactsReducer,
   filter: filterReducer,
 });

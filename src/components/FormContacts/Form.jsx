@@ -82,23 +82,13 @@ export const ContactForm = () => {
     >
       <FormBox autoComplete="off">
         <FormContainer>
-          <FormLabel
-            style={{
-              display: 'block',
-            }}
-            htmlFor={nameInputId}
-          >
+          <FormLabel htmlFor={nameInputId}>
             Name
             <FormInput type="text" name="name" id={nameInputId} />
             <FormError name="name" />
           </FormLabel>
 
-          <FormLabel
-            style={{
-              display: 'block',
-            }}
-            htmlFor={numberInputId}
-          >
+          <FormLabel htmlFor={numberInputId}>
             Number
             <FormInput type="tel" name="number" id={numberInputId} />
             <FormError name="number" />
