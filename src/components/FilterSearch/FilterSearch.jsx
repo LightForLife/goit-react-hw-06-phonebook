@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { filterContacts } from 'redux/actions';
+import { filterContacts } from 'redux/filterSlice';
 import PropTypes from 'prop-types';
 import { LabelFilter, FilterBox, InputFilter } from './FilterSearch.styled';
 

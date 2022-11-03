@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import { nanoid } from 'nanoid';
-import { addContact } from 'redux/actions';
+import { addContact } from 'redux/contactsSlice';
 import {
   FormBox,
   AddContactBtn,
