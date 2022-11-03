@@ -9,22 +9,10 @@ const filterSlice = createSlice({
   initialState: filterInitialState,
   reducers: {
     filterContacts(state, action) {
-      return {
-        ...state,
-        filterValue: action.payload,
-      };
+      state.filterValue = action.payload;
     },
   },
 });
 
 export const { filterContacts } = filterSlice.actions;
 export const filterReducer = filterSlice.reducer;
-
-// export const filterReducer = createReducer(filterInitialState, {
-//   [filterContacts]: (state, action) => {
-//     return {
-//       ...state,
-//       filterValue: action.payload,
-//     };
-//   },
-// });

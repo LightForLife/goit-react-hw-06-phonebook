@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 import { getContacts } from 'redux/selectors';
 import { getFilter } from 'redux/selectors';
-import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import { ItemContacts } from 'components/ItemContacts/ItemContacts';
 
@@ -10,9 +9,9 @@ export const ListContacts = () => {
   const filter = useSelector(getFilter);
 
   const visibleContacts = () => {
-    const constNormalizedFilter = filter.filterValue.toLowerCase();
+    const constNormalizedFilter = filter.toLowerCase();
 
-    const filterContacts = contacts.items.filter(contact =>
+    const filterContacts = contacts.filter(contact =>
       contact.name.toLowerCase().includes(constNormalizedFilter)
     );
 
@@ -28,15 +27,4 @@ export const ListContacts = () => {
       ))}
     </ul>
   );
-};
-
-ListContacts.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
-  onDelete: PropTypes.func,
 };

@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/contactsSlice';
 import PropTypes from 'prop-types';
 import { FaUserTimes } from 'react-icons/fa';
+import { deleteContact } from 'redux/contactsSlice';
 import {
   ItemContact,
   NameContact,
@@ -12,6 +12,7 @@ import {
 export const ItemContacts = ({ id, name, number }) => {
   const dispatch = useDispatch();
   const handleDelete = () => dispatch(deleteContact(id));
+
   return (
     <ItemContact id={id}>
       <NameContact>

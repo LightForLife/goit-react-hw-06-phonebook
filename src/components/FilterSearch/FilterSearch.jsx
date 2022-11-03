@@ -1,6 +1,5 @@
 import { useDispatch } from 'react-redux';
 import { filterContacts } from 'redux/filterSlice';
-import PropTypes from 'prop-types';
 import { LabelFilter, FilterBox, InputFilter } from './FilterSearch.styled';
 
 export const Filter = () => {
@@ -17,8 +16,4 @@ export const Filter = () => {
       <InputFilter type="text" onChange={handleChange} />
     </FilterBox>
   );
-};
-
-Filter.propTypes = {
-  onChange: PropTypes.func,
 };
